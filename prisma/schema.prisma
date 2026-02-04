@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+model User {
+  id                    String @id @default(uuid())
+  name                  String
+  email                 String @unique
+  hashed_password       String
+  profile_picture_uri   String?
+  created_at            DateTime @default(now())
+  updated_at            DateTime @default(now())
+
+  channels               Channel[]
+}
+
+model Channel {
+  id                    String @id @default(uuid())
+  user_id               String
+  name                  String
+  description           String?
+  banner_uri            String?
+  created_at            DateTime @default(now())
+  updated_at            DateTime @default(now())
+
+  videos                Video[]
+
+  user                  User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model Video {
+  id                    String @id @default(uuid())
+  channel_id            String
+  title                 String
+  description           String?
+  storage_uri           String
+  thumbnail_uri         String
+  created_at            DateTime @default(now())
+  updated_at            DateTime @default(now())
+
+  channel               Channel @relation(fields: [channel_id], references: [id], onDelete: Cascade)
+}
