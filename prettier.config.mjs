@@ -1,6 +1,6 @@
 const prettierConfig = {
   semi: true,
-  trailingComma: "es5",
+  trailingComma: "all",
   arrowParens: "always",
   tabWidth: 2,
   useTabs: false,
