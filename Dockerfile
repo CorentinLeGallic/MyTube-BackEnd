@@ -16,6 +16,7 @@ RUN npx prisma generate
 # Copy the entrypoint.sh script and make it executable
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
+RUN chown node:node /app/entrypoint.sh
 
 # Copy the rest of the files in the container as the node user
 COPY --chown=node:node . .
