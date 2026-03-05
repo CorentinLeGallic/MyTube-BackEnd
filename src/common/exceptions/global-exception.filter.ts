@@ -3,6 +3,9 @@ import { Request, Response } from "express";
 import BusinessException from "./base.exception";
 
 const BUSINESS_EXCEPTIONS: Record<string, number> = {
+  EMAIL_ALREADY_IN_USE: HttpStatus.CONFLICT,
+  INVALID_CREDENTIALS: HttpStatus.UNAUTHORIZED,
+  INVALID_REFRESH_TOKEN: HttpStatus.UNAUTHORIZED,
   DEFAULT: HttpStatus.BAD_REQUEST,
 };
 

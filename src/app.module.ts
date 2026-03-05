@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { PrismaModule } from "common/prisma/prisma.module";
+import { AuthModule } from "./modules/auth/auth.module";
 import validate from "env.validation";
 
 @Module({
@@ -9,9 +9,8 @@ import validate from "env.validation";
       validate,
       isGlobal: true,
     }),
-    PrismaModule,
+    AuthModule,
   ],
   controllers: [],
-  providers: [],
 })
 export class AppModule {}

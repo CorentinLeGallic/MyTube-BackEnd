@@ -14,6 +14,29 @@ generator client {
   moduleFormat = "cjs"
 }
 
+model RefreshToken {
+  id                    String @id @default(uuid())
+  hashed_value          String @unique
+  family_id             String
+  created_at            DateTime @default(now())
+  expires_at            DateTime
+  revoked_at            DateTime?
+  used_at               DateTime?
+
+  family                RefreshTokenFamily @relation(fields: [family_id], references: [id], onUpdate: Cascade, onDelete: Cascade)
+}
+
+model RefreshTokenFamily {
+  id                    String @id @default(uuid())
+  user_id               String
+  created_at            DateTime @default(now())
+  revoked_at            DateTime?
+
+  user                  User @relation(fields: [user_id], references: [id], onUpdate: Cascade, onDelete: NoAction)
+
+  refreshTokens         RefreshToken[]
+}
+
 model User {
   id                    String @id @default(uuid())
   name                  String
@@ -24,6 +47,7 @@ model User {
   updated_at            DateTime @default(now())
 
   channels              Channel[]
+  refreshTokenFamilies  RefreshTokenFamily[]
 }
 
 model Channel {
