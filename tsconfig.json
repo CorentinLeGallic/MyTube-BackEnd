@@ -21,7 +21,7 @@
       "@guards/*": ["common/guards/*"],
       "@interceptors/*": ["common/interceptors/*"],
       "@pipes/*": ["common/pipes/*"],
-      "@utils/*": ["common/utils/*"],
+      "@utils/*": ["common/utils/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
@@ -30,5 +30,8 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "noFallthroughCasesInSwitch": true
+  },
+  "watchOptions": {
+    "watchFile": "fixedPollingInterval"
   }
 }
